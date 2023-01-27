@@ -6,13 +6,13 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:25:29 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/25 14:34:05 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/27 14:28:53 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	ft_wordcount(char const *s, char c)
+int	ft_wordcount(char const *s, char c)
 {
 	int	i;
 	int	count;

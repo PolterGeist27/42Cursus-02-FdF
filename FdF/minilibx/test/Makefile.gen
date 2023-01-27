@@ -1,5 +1,5 @@
-INC=/usr/X11R6/include
-HT=OpenBSD
+INC=/usr/include
+HT=Linux
 DOCP=do_cp
 
 

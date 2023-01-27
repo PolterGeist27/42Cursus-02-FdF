@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 11:45:14 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/27 14:15:07 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/27 15:11:46 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,41 +32,46 @@ int get_height(char *file_name)
 	int	fd;
 
 	fd = open(file_name, 'r');
-	while (get_next_line(fd) != NULL)
+	height = 0;
+	while (get_next_line(fd))
 		height++;
 	close(fd);
 	return (height);
 }
 
-void	fill_map(int **map, char *file_name)
+int **fill_map(t_data *data, char *file_name)
 {
 	int		fd;
 	int		i;
-	int		j;
+	int		j;	
+	int		**map;
 	char	*line;
 
 	j = 0;
+	i = 0;
+	map = (int **)malloc(sizeof(int *) * data->width);
 	fd = open(file_name, 'r');
 	line = get_next_line(fd);
 	while (line != NULL)
 	{	
-		i = 0;
-		while (line[i] != '\0')
+		map[i] = (int *)malloc(sizeof(int) * (data->height));
+		while(line[j] != '\0')
 		{
-			map[j][i] = line[i];
-			i++;
+			map[i][j] = ft_atoi(&line[j]);
+			j++;
 		}
-		j++;
-		free(line);
+		i++;
+		// ERROR IS HERE
 		line = get_next_line(fd);
 	}
-	free(line);
 	close(fd);
+	return (map);
 }
 
 void	read_file(t_data *data, char *file_name)
 {
 	data->height = get_height(file_name);
 	data->width = get_width(file_name);
-	fill_map(data->map, file_name);
+	data->map = fill_map(data, file_name);
+		ft_printf("here2\n");
 }

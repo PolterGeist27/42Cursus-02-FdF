@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:44:03 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/27 14:06:01 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/27 14:27:44 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,6 @@
 # include <stdio.h>
 # include <string.h>
 
-//	read_file.c
-void	read_file(t_data *data, char *file_name);
-int 	get_height(char *file_name);
-int 	get_width(char *file_name);
-
-//	utils.c
-int		ft_wordcount(char const *s, char c);
-
 typedef struct s_data {
 
 	int 	width;
@@ -40,5 +32,13 @@ typedef struct s_data {
 	void	*mlx;
 	void	*mlx_win;
 } t_data;
+
+//	read_file.c
+void	read_file(t_data *data, char *file_name);
+int 	get_height(char *file_name);
+int 	get_width(char *file_name);
+
+//	utils.c
+int		ft_wordcount(char const *s, char c);
 
 #endif

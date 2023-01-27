@@ -6,13 +6,13 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:10:42 by diogmart          #+#    #+#             */
-/*   Updated: 2022/11/10 12:43:18 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/27 14:25:57 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_wordcount(char const *s, char c)
+int	ft_wordcount(char const *s, char c)
 {
 	int	i;
 	int	count;
