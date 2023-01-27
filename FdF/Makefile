@@ -11,6 +11,7 @@ SRCS = $(addprefix ${DIRSRC}, $(addsuffix .c, ${SRC}))
 NAME = fdf.a
 NAMELIBFT = libft.a
 CFLAGS = -Wall -Wextra -Werror -I $(DIRINC)
+MLX_FLAGS = /minilibx/libmlx.a -L -lmlx -lXext -lX11
 CC = cc
 LIBC = ar rc
 RM = rm -f
@@ -21,7 +22,7 @@ $(NAMELIBFT):
 	make all -C $(DIRLIB)
 
 $(NAME): $(NAMELIBFT)
-	$(CC) $(CFLAGS) $(SRCS) libft/libft.a -o fdf
+	$(CC) $(CFLAGS) $(MLX_FLAGS) $(SRCS) libft/libft.a -o fdf
 
 bonus: $(NAMELIBFT)
 #	...

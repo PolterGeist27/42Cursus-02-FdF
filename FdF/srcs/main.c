@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 11:45:06 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/25 13:33:31 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/27 14:10:38 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@ void	free_data(t_data *data)
 	free(data->map);
 }
 
+void	init_data(t_data **data)
+{
+	(*data)->mlx = mlx_init();
+	(*data)->mlx_win = mlx_new_window((*data)->mlx, 1920, 1080, "FdF");
+	(*data) = malloc(sizeof(t_data));
+	(*data)->height = 0;
+	(*data)->width = 0;
+	(*data)->map = NULL;
+}
+
 int	main(int argc, char **argv)
 {
 	t_data *data;
@@ -35,11 +45,8 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	data = malloc(sizeof(t_data));
-	data->height = 0;
-	data->width = 0;
-	data->map = NULL;
+	init_data(&data);
 	read_file(data, argv[1]);
-	
-	
 	free_data(data);
+	mlx_loop(data->mlx);
 }
