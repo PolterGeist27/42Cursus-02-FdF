@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 11:45:14 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/27 15:11:46 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:11:31 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,18 @@ int	get_width(char *file_name)
 	fd = open(file_name, 'r');
 	line = get_next_line(fd);
 	width = ft_wordcount(line, ' ');
-	free(line);
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
 	close(fd);
 	return (width);
 }
 
-int get_height(char *file_name)
+int	get_height(char *file_name)
 {
-	int height;
+	int	height;
 	int	fd;
 
 	fd = open(file_name, 'r');
@@ -39,29 +43,39 @@ int get_height(char *file_name)
 	return (height);
 }
 
-int **fill_map(t_data *data, char *file_name)
+int	**fill_map(t_data *data, char *file_name)
 {
 	int		fd;
 	int		i;
-	int		j;	
+	int		j;
+	int		h;
 	int		**map;
 	char	*line;
 
 	j = 0;
 	i = 0;
-	map = (int **)malloc(sizeof(int *) * data->width);
+	h = 0;
+	map = (int **)ft_calloc(sizeof(int *), (data->width + 1));
 	fd = open(file_name, 'r');
 	line = get_next_line(fd);
-	while (line != NULL)
-	{	
-		map[i] = (int *)malloc(sizeof(int) * (data->height));
-		while(line[j] != '\0')
+	while (h < data->width)
+		map[h++] = (int *)ft_calloc(sizeof(int), (data->height + 1));
+	while (line != NULL && i < data->height)
+	{
+		h = 0;
+		while (line[j] != '\0')
 		{
-			map[i][j] = ft_atoi(&line[j]);
-			j++;
+			if (ft_isdigit(line[j]))
+			{
+				map[h++][i] = ft_atoi(&line[j]);
+				j += ft_nbr_len(ft_atoi(&line[j]));
+			}
+			else
+				j++;
 		}
 		i++;
-		// ERROR IS HERE
+		j = 0;
+		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
@@ -73,5 +87,4 @@ void	read_file(t_data *data, char *file_name)
 	data->height = get_height(file_name);
 	data->width = get_width(file_name);
 	data->map = fill_map(data, file_name);
-		ft_printf("here2\n");
 }

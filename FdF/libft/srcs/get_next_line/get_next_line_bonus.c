@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 09:50:33 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/27 15:11:26 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/02/06 12:50:40 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,8 @@ char	*get_next_line(int fd)
 	while (ft_strchr(stash[fd], '\n') == NULL
 		&& bytes > 0)
 		bytes = read_buffer(fd, &(stash[fd]), buffer);
-	free(buffer);
+	if (buffer != NULL)
+		free(buffer);
 	if (bytes == -1)
 		return (NULL);
 	if (ft_strlen(stash[fd]) == 0)
