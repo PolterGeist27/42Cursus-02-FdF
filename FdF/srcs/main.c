@@ -6,23 +6,24 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 11:45:06 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/27 14:30:58 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/02/07 10:15:31 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	free_data(t_data *data)
+void	free_data(t_data **data)
 {
 	int i;
 
 	i = 0;
-	while (data->map[i] != NULL)
+	while (i < (*data)->height)
 	{
-		free(data->map[i]);
+		free((*data)->map[i]);
 		i++;
 	}
-	free(data->map);
+	free((*data)->map);
+	free(*data);
 }
 
 void	init_data(t_data **data)
@@ -45,7 +46,7 @@ int	main(int argc, char **argv)
 	}
 	data = malloc(sizeof(t_data));
 	init_data(&data);
-	read_file(data, argv[1]);
-//	free_data(data);
+	read_file(&data, argv[1]);
+	free_data(&data);
 //	mlx_loop(data->mlx);
 }
