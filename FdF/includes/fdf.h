@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:44:03 by diogmart          #+#    #+#             */
-/*   Updated: 2023/02/07 10:03:59 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/02/13 12:17:35 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FDF_H
 
 # include "libft.h"
-# include "../minilibx/mlx.h"
+# include "mlx.h"
 # include <math.h>
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -29,8 +29,16 @@ typedef struct s_data {
 	int		height;
 	int 	**map;
 
-//	void	*mlx;
-//	void	*mlx_win;
+	// Minilibx
+	void	*mlx;
+	void	*mlx_win;
+	
+	// Image
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 } t_data;
 
 //	read_file.c
@@ -41,5 +49,7 @@ int 	get_width(char *file_name);
 //	utils.c
 int		ft_wordcount(char const *s, char c);
 int		ft_nbr_len(long n);
+int		max(int x, int y);
+int		module(int x);
 
 #endif
