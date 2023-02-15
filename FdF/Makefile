@@ -23,6 +23,7 @@ all: $(NAME)
 
 $(NAMELIBFT):
 	make all -C $(DIRLIB)
+	make all -C ./minilibx/
 
 $(NAME): $(NAMELIBFT)
 	$(CC) $(CFLAGS) $(MLX_FLAGS) $(SRCS) minilibx/libmlx.a libft/libft.a -o fdf -I $(DIRINC)

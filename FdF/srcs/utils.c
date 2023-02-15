@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:25:29 by diogmart          #+#    #+#             */
-/*   Updated: 2023/02/13 11:49:27 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/02/14 10:46:54 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ft_nbr_len(long n)
 	return (len);
 }
 
-int	max(int x, int y)
+int	ft_max(int x, int y)
 {
 	if (x > y)
 		return (x);
@@ -65,7 +65,7 @@ int	max(int x, int y)
 int	module(int x)
 {
 	if (x < 0)
-		return (x * -1);
+		return (-x);
 	else
 		return (x);
 }
