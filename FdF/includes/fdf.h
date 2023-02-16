@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:44:03 by diogmart          #+#    #+#             */
-/*   Updated: 2023/02/15 11:39:21 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/02/16 10:29:27 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <math.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <string.h>

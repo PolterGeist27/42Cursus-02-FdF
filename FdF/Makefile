@@ -1,8 +1,24 @@
-DIRLIB = ./libft/
+NAME = fdf.a
 
-DIRINC = ./includes/
+NAMELIBFT = libft/libft.a
+
+NAMEMLX = minilibx/libmlx.a
 
 DIRSRC = ./srcs/
+
+LIBDIR = ./includes/
+
+INC=/usr/includes/
+
+INCLIB=$(INC)/../lib
+
+CC = cc
+
+CFLAGS = -I$(LIBDIR) -I/usr/include -O3 -g
+
+LFLAGS = $(NAMELIBFT) $(NAMEMLX) -L$(INCLIB) -lXext -lX11 -lm -lbsd
+
+MLX_FLAGS = $(NAMEMLX) -L -lmlx -lXext -lX11
 
 SRC =	main \
 		read_file \
@@ -11,31 +27,36 @@ SRC =	main \
 
 SRCS = $(addprefix ${DIRSRC}, $(addsuffix .c, ${SRC}))
 
-NAME = fdf.a
-NAMELIBFT = libft.a
-CFLAGS = -Wall -Wextra -Werror 
-MLX_FLAGS = -L -lmlx -lXext -lX11 -lm
-CC = cc
-LIBC = ar rc
-RM = rm -f
+OBJS = $(SRCS:%.c=%.o)
 
 all: $(NAME)
 
+$(NAME): $(OBJS) $(NAMELIBFT) $(NAMEMLX)
+	$(CC) -o fdf $(OBJS) $(LFLAGS)
+	@echo "Compiled $@"
+
 $(NAMELIBFT):
-	make all -C $(DIRLIB)
-	make all -C ./minilibx/
+	@make all -s -C ./libft
+	@echo "Compiled $@"
 
-$(NAME): $(NAMELIBFT)
-	$(CC) $(CFLAGS) $(MLX_FLAGS) $(SRCS) minilibx/libmlx.a libft/libft.a -o fdf -I $(DIRINC)
+$(NAMEMLX):
+	@make all -s -C ./minilibx
+	@echo "Compiled $@"
 
-bonus: $(NAMELIBFT)
-#	...
+# bonus:
+# 	make all -C ./libft
+# 	$(CC) -g $(CFLAGS) $(SRC_C_BONUS) $(NAMELIBFT) -o checker
 
 clean:
-	make clean -C $(DIRLIB)
+	@rm -rf $(OBJS)
+	@make -s -C ./libft clean
+	@make -s -C ./minilibx clean
+	@echo "Remove objects files."
 
 fclean: clean
-	make fclean -C $(DIRLIB)
-	rm -f fdf
+	@make -s -C ./libft fclean
+	@make -s -C ./minilibx clean
+	@rm -rf fdf
+	@echo "Remove static libraries and executables."
 
 re: fclean all
