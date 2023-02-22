@@ -24,6 +24,7 @@ SRC =	main \
 		read_file \
 		utils \
 		draw \
+		keys \
 
 SRCS = $(addprefix ${DIRSRC}, $(addsuffix .c, ${SRC}))
 

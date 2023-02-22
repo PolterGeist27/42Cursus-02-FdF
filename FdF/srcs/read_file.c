@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 11:45:14 by diogmart          #+#    #+#             */
-/*   Updated: 2023/02/07 10:14:14 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:31:35 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	get_width(char *file_name)
 
 	fd = open(file_name, 'r');
 	line = get_next_line(fd);
-	width = ft_wordcount(line, ' ');
+	width = ft_countwords(line, ' ');
 	while (line != NULL)
 	{
 		free(line);
@@ -72,21 +72,20 @@ int	get_height(char *file_name)
 
 void	fill_row(int *row, char *line)
 {
-	int	i;
-	int	j;
+	char	**split;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
-	while (line[j] != '\0')
+	split = ft_split(line, ' ');
+	while (split[j] != NULL)
 	{
-		if (ft_isdigit(line[j]))
-		{
-			row[i++] = ft_atoi(&line[j]);
-			j += ft_nbr_len(ft_atoi(&line[j]));
-		}
-		else
-			j++;
+		row[i++] = ft_atoi(split[j]);
+		free(split[j]);
+		j++;
 	}
+	free(split);
 }
 
 void	read_file(t_data **data, char *file_name)
@@ -96,16 +95,16 @@ void	read_file(t_data **data, char *file_name)
 	int		i;
 	int		h;
 
-	(*data)->height = get_height(file_name);
-	(*data)->width = get_width(file_name);
+	(*data)->map_h = get_height(file_name);
+	(*data)->map_w = get_width(file_name);
 	fd = open(file_name, 'r');
 	i = 0;
 	h = 0;
-	(*data)->map = (int **)malloc(sizeof(int *) * ((*data)->height));
+	(*data)->map = (int **)malloc(sizeof(int *) * ((*data)->map_h));
 	line = get_next_line(fd);
-	while (h < (*data)->height)
-		(*data)->map[h++] = (int *)malloc(sizeof(int) * ((*data)->width));
-	while (line != NULL && i < (*data)->height)
+	while (h < (*data)->map_h)
+		(*data)->map[h++] = (int *)malloc(sizeof(int) * ((*data)->map_w));
+	while (line != NULL && i < (*data)->map_h)
 	{
 		fill_row((*data)->map[i++], line);
 		free(line);

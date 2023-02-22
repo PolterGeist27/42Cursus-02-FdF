@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 11:45:06 by diogmart          #+#    #+#             */
-/*   Updated: 2023/02/16 11:04:42 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/02/22 12:15:06 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_data(t_data *data)
 	int i;
 
 	i = 0;
-	while (i < data->height)
+	while (i < data->map_h)
 	{
 		free(data->map[i]);
 		i++;
@@ -42,12 +42,14 @@ void	init_data(t_data *data)
 	data->mlx = mlx_init();
 	data->mlx_win = mlx_new_window(data->mlx, 1920, 1080, "FdF");
 	//Image
- 	data->img = mlx_new_image(data->mlx, 1920, 1080);
+	data->img_w = 1920;
+	data->img_h = 1080;
+ 	data->img = mlx_new_image(data->mlx, data->img_w, data->img_h);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
 		&data->line_length, &data->endian);
 	// map data
-	data->height = 0;
-	data->width = 0;
+	data->map_h = 0;
+	data->map_w = 0;
 	data->map = NULL;
 	// Zoom
 	data->zoom = 20;
@@ -68,6 +70,7 @@ int	main(int argc, char **argv)
 	init_data(data);
 	read_file(&data, argv[1]);
 	draw(data);
+	mlx_mouse_hook(data->mlx_win, mouse_hook, data);
 	mlx_hook(data->mlx_win, 17, 0, &ft_close, data);
 	mlx_loop(data->mlx);
 }

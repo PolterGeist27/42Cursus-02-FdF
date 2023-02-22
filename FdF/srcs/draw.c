@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 11:09:32 by diogmart          #+#    #+#             */
-/*   Updated: 2023/02/16 11:23:13 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/02/22 10:03:32 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	isometric(t_data *data, float *x, float *y, int *z)
 	float	x0;
 	float	y0;
 	float	z0;
-	double	x_angle = 0;
+	double	x_angle = 0.61;
 	double	y_angle = 0;
 	double	z_angle = 0;
 
@@ -36,10 +36,8 @@ void	isometric(t_data *data, float *x, float *y, int *z)
 	z0 = *z * data->zoom;
 
 	//isometric matrix
-	*x = x0 * cos(0.80) - y0 * sin(0.80);
-	*y = y0 * cos(0.80) + z0 + x0 * sin(0.80);
-	// x = x0 * cos(0.8) - y0 * sin(0.8);
-	// y = y0 * cos(0.8) + x0 * sin(0.8);
+	*x = x0 * cos(0.8) - y0 * sin(0.8);
+	*y = y0 * cos(0.8) + z0 + x0 * sin(0.8);
 
   	//rotate around z axis
  	x0 = *x * cos(z_angle) - *y * sin(z_angle);
@@ -61,21 +59,14 @@ void	isometric(t_data *data, float *x, float *y, int *z)
 	*z = z0;
 }
 
-
-/* void	ft_isometric(float *x, float *y, int z)
+int	check_limits(t_data *data, int x, int y)
 {
-	float	x0;
-	float	y0;
-
-	x0 = *x;
-	y0 = *y;
-	
-	*x = x0 * cos(0.8) - y0 * sin(0.8);
-	*y = x0 * sin(0.8) + y0 * cos(0.8) + z;
-
-//	*x = (*x - *y) * cos(0.8);
-//	*y = (x0 + *y) * sin(0.8) - z;
-} */
+	if (data->img_w < x || x < 0)
+		return (0);
+	if (data->img_h < y || y < 0)
+		return (0);
+	return (1);
+}
 
 void	ft_bresenham(t_data *data, float x0, float y0, float x1, float y1)
 {
@@ -88,21 +79,20 @@ void	ft_bresenham(t_data *data, float x0, float y0, float x1, float y1)
 
 	z = -data->map[(int)y0][(int)x0];
 	z1 = -data->map[(int)y1][(int)x1];
+	data->color = (z || z1) ? 0xe80c0c : 0xFFFFFF;
 	isometric(data, &x0, &y0, &z);
 	isometric(data, &x1, &y1, &z1);
-	//data->color = (z) ? 0xe80c0c : 0xFFFFFF;
 
 	x_step = x1 - x0;
 	y_step = y1 - y0;
 
-	//max = ft_max(module(x_step), module(y_step));
 	pixels = sqrt((x_step * x_step) + (y_step * y_step));
 	x_step /= pixels;
 	y_step /= pixels;
 	while (pixels > 0)
 	{
-		my_mlx_pixel_put(data, (int)x0, (int)y0, data->color);
-		//mlx_pixel_put(data->mlx, data->mlx_win, x0, y0, data->color);
+		if (check_limits(data, x0, y0))
+			my_mlx_pixel_put(data, (int)x0, (int)y0, data->color);
 		x0 += x_step;
 		y0 += y_step;
 		pixels--;
@@ -115,14 +105,14 @@ void	draw(t_data *data)
 	float	x;
 
 	y = 0;
-	while (y < data->height)
+	while (y < data->map_h)
 	{
 		x = 0;
-		while (x < data->width)
+		while (x < data->map_w)
 		{
-			if (x < data->width - 1)
+			if (x < data->map_w - 1)
 				ft_bresenham(data, (float)x, (float)y, (float)(x + 1), (float)y);
-			if (y < data->height - 1)
+			if (y < data->map_h - 1)
 				ft_bresenham(data, (float)x, (float)y, (float)x, (float)(y + 1));
 			x++;
 		}
