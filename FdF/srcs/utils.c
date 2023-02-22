@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:25:29 by diogmart          #+#    #+#             */
-/*   Updated: 2023/02/22 09:40:18 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:04:53 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,12 @@ int	module(int x)
 		return (-x);
 	else
 		return (x);
+}
+
+void	choose_draw(t_data *data)
+{
+	if (data->dimension == 1)
+		draw(data);
+	else if (data->dimension == -1)
+		draw_2d(data);
 }

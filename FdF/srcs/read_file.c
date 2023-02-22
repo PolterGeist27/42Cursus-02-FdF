@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 11:45:14 by diogmart          #+#    #+#             */
-/*   Updated: 2023/02/22 11:31:35 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:40:29 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,6 @@ void	read_file(t_data **data, char *file_name)
 		line = get_next_line(fd);
 	}
 	close(fd);
+/* 	(*data)->ops.x_translate = ((*data)->img_w - (*data)->map_w) / 2;
+	(*data)->ops.y_translate = ((*data)->img_h - (*data)->map_h) / 2; */
 }

@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 11:45:06 by diogmart          #+#    #+#             */
-/*   Updated: 2023/02/22 12:15:06 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:50:34 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,17 @@ void	init_data(t_data *data)
 	data->map_h = 0;
 	data->map_w = 0;
 	data->map = NULL;
-	// Zoom
-	data->zoom = 20;
+	// Operations
+	data->ops.zoom = 20;
+	data->ops.x_translate = 0;
+	data->ops.y_translate = 0;
+	data->ops.x_angle = 0.61;
+	data->ops.y_angle = 0;
+	data->ops.z_angle = 0;
 	// Color
 	data->color = 0xFFFFFF;
+	// Dimension
+	data->dimension = 1;
 }
 
 int	main(int argc, char **argv)
@@ -69,8 +76,11 @@ int	main(int argc, char **argv)
 	data = malloc(sizeof(t_data));
 	init_data(data);
 	read_file(&data, argv[1]);
+	data->ops.x_translate = (data->img_w - (data->ops.zoom  * data->map_w)) / 2;
+	data->ops.y_translate = (data->img_h - (data->ops.zoom  * data->map_h)) / 2;
 	draw(data);
 	mlx_mouse_hook(data->mlx_win, mouse_hook, data);
-	mlx_hook(data->mlx_win, 17, 0, &ft_close, data);
+	mlx_hook(data->mlx_win, 2, (1L << 0), check_keys, data);
+	mlx_hook(data->mlx_win, 17, 0, ft_close, data);
 	mlx_loop(data->mlx);
 }

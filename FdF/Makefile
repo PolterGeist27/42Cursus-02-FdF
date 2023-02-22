@@ -8,13 +8,13 @@ DIRSRC = ./srcs/
 
 LIBDIR = ./includes/
 
-INC=/usr/includes/
+INC = /usr/includes/
 
-INCLIB=$(INC)/../lib
+INCLIB = $(INC)/../lib
 
 CC = cc
 
-CFLAGS = -I$(LIBDIR) -I/usr/include -O3 -g
+CFLAGS = -I$(LIBDIR) -I/usr/include -O3
 
 LFLAGS = $(NAMELIBFT) $(NAMEMLX) -L$(INCLIB) -lXext -lX11 -lm -lbsd
 
@@ -25,6 +25,7 @@ SRC =	main \
 		utils \
 		draw \
 		keys \
+		draw_2d \
 
 SRCS = $(addprefix ${DIRSRC}, $(addsuffix .c, ${SRC}))
 

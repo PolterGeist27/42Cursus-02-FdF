@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 11:09:32 by diogmart          #+#    #+#             */
-/*   Updated: 2023/02/22 10:03:32 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:45:22 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,36 +26,36 @@ void	isometric(t_data *data, float *x, float *y, int *z)
 	float	x0;
 	float	y0;
 	float	z0;
-	double	x_angle = 0.61;
-	double	y_angle = 0;
-	double	z_angle = 0;
+	double	x_angle = data->ops.x_angle;
+	double	y_angle = data->ops.y_angle;
+	double	z_angle = data->ops.z_angle;
 
-	//scaling
-	x0 = *x * data->zoom;
-	y0 = *y * data->zoom;
-	z0 = *z * data->zoom;
+	// scaling
+	x0 = *x * data->ops.zoom;
+	y0 = *y * data->ops.zoom;
+	z0 = *z * data->ops.zoom;
 
-	//isometric matrix
+	// isometric matrix
 	*x = x0 * cos(0.8) - y0 * sin(0.8);
-	*y = y0 * cos(0.8) + z0 + x0 * sin(0.8);
+	*y = y0 * cos(0.8) + x0 * sin(0.8);
 
-  	//rotate around z axis
+  	// rotate around z axis
  	x0 = *x * cos(z_angle) - *y * sin(z_angle);
 	y0 = *x * sin(z_angle) + *y * cos(z_angle);
 
-	// //rotate around y axis
+	// rotate around y axis
  	*x = x0 * cos(y_angle) + z0 * sin(y_angle);
 	*z = -x0 * sin(y_angle) + z0 * cos(y_angle);
 	*y = y0;
 
-	//rotate around x axis
+	// rotate around x axis
  	y0 = *y * cos(x_angle) - *z * sin(x_angle);
 	z0 = *y * sin(x_angle) + *z * cos(x_angle);
 	x0 = *x;
 
-	//translate
-	*x = x0 + 200;
-	*y = y0 + 200;
+	// translate
+	*x = x0 + data->ops.x_translate;
+	*y = y0 + data->ops.y_translate;
 	*z = z0;
 }
 
