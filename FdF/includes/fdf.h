@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:44:03 by diogmart          #+#    #+#             */
-/*   Updated: 2023/03/01 12:22:32 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/03/01 12:30:16 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FDF_H
 
 # include "libft.h"
-# include "mlx.h"
+# include "../minilibx/mlx.h"
 # include <math.h>
 # include <fcntl.h>
 # include <sys/types.h>
@@ -62,16 +62,11 @@ typedef struct s_operations
 }	t_op;
 
 typedef struct s_data {
-
-	int 	map_w;
+	int		map_w;
 	int		map_h;
-	int 	**map;
-
-	// Minilibx
+	int		**map;
 	void	*mlx;
 	void	*mlx_win;
-
-	// Image
 	int		img_w;
 	int		img_h;
 	void	*img;
@@ -79,24 +74,18 @@ typedef struct s_data {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-
-	// Operations
-	t_op ops;
-
-	// Color
-	int	color;
-
-	// Dimension (2D or 3D)
-	int dimension;
-} t_data;
+	t_op	ops;
+	int		color;
+	int		dimension;
+}	t_data;
 
 // main.c 
-int	ft_close(t_data *data);
+int		ft_close(t_data *data);
 
 //	read_file.c
 void	read_file(t_data **data, char *file_name);
-int 	get_height(char *file_name);
-int 	get_width(char *file_name);
+int		get_height(char *file_name);
+int		get_width(char *file_name);
 void	fill_row(int *row, char *line);
 
 //	utils.c
@@ -118,7 +107,7 @@ void	ft_bresenham_2d(t_data *data, t_vector p0, t_vector p1);
 
 // keys.c
 int		check_keys(int key, t_data *img);
-int		mouse_hook(int button,int x,int y,void *param);
+int		mouse_hook(int button, int x, int y, void *param);
 
 // draw_utils.c
 void	draw_line(t_data *data, t_vector p0, t_vector p1);
