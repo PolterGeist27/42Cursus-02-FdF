@@ -26,6 +26,7 @@ SRC =	main \
 		draw \
 		keys \
 		draw_2d \
+		draw_utils \
 
 SRCS = $(addprefix ${DIRSRC}, $(addsuffix .c, ${SRC}))
 

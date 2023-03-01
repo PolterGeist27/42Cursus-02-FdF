@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:44:03 by diogmart          #+#    #+#             */
-/*   Updated: 2023/02/22 14:21:02 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/03/01 12:22:32 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ typedef struct s_vector
 	float	y;
 }	t_vector;
 
+typedef struct s_point
+{
+	float	x;
+	float	y;
+	float	z;
+}	t_point;
+
 typedef struct s_operations
 {
 	int		zoom;
@@ -63,7 +70,7 @@ typedef struct s_data {
 	// Minilibx
 	void	*mlx;
 	void	*mlx_win;
-	
+
 	// Image
 	int		img_w;
 	int		img_h;
@@ -75,13 +82,12 @@ typedef struct s_data {
 
 	// Operations
 	t_op ops;
-	
+
 	// Color
 	int	color;
 
 	// Dimension (2D or 3D)
 	int dimension;
-	
 } t_data;
 
 // main.c 
@@ -102,16 +108,22 @@ void	choose_draw(t_data *data);
 
 // draw.c
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	ft_bresenham(t_data *data, float x0, float y0, float x1, float y1);
+void	ft_bresenham(t_data *data, t_vector p0, t_vector p1);
 void	draw(t_data *data);
 int		check_limits(t_data *data, int x, int y);
 
 // draw_2d.c
 void	draw_2d(t_data *data);
-void	ft_bresenham_2d(t_data *data, float x0, float y0, float x1, float y1);
+void	ft_bresenham_2d(t_data *data, t_vector p0, t_vector p1);
 
 // keys.c
 int		check_keys(int key, t_data *img);
 int		mouse_hook(int button,int x,int y,void *param);
+
+// draw_utils.c
+void	draw_line(t_data *data, t_vector p0, t_vector p1);
+void	draw_line_2d(t_data *data, t_vector p0, t_vector p1);
+void	ft_get_color(t_data *data, int z, int z1);
+t_point	ft_algebra(t_data *data, t_point point);
 
 #endif

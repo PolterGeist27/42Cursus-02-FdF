@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 10:27:46 by diogmart          #+#    #+#             */
-/*   Updated: 2023/02/22 14:31:15 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/03/01 10:40:53 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_translate(int key, t_data *data)
 {
- 	if (key == UP)
+	if (key == UP)
 		data->ops.y_translate += 10;
 	else if (key == DOWN)
 		data->ops.y_translate -= 10;
@@ -64,18 +64,17 @@ int	mouse_hook(int button, int x, int y, void *param)
 {
 	t_data	*data;
 
-	
 	data = (t_data *)param;
 	(void)x;
 	(void)y;
- 	if (button == 5)
+	if (button == 5)
 	{
- 		if (data->ops.zoom > 2)
+		if (data->ops.zoom > 2)
 			data->ops.zoom = data->ops.zoom / 1.5;
 	}
 	if (button == 4)
 	{
- 		if (data->ops.zoom < 10000)
+		if (data->ops.zoom < 10000)
 			data->ops.zoom = data->ops.zoom * 1.5;
 	}
 	mlx_clear_window(data->mlx, data->mlx_win);

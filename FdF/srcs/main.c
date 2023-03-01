@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 11:45:06 by diogmart          #+#    #+#             */
-/*   Updated: 2023/02/22 14:50:34 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/03/01 10:39:09 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_data(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->map_h)
@@ -38,29 +38,23 @@ int	ft_close(t_data *data)
 
 void	init_data(t_data *data)
 {
-	// Minilibx
 	data->mlx = mlx_init();
 	data->mlx_win = mlx_new_window(data->mlx, 1920, 1080, "FdF");
-	//Image
 	data->img_w = 1920;
 	data->img_h = 1080;
- 	data->img = mlx_new_image(data->mlx, data->img_w, data->img_h);
+	data->img = mlx_new_image(data->mlx, data->img_w, data->img_h);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
-		&data->line_length, &data->endian);
-	// map data
+			&data->line_length, &data->endian);
 	data->map_h = 0;
 	data->map_w = 0;
 	data->map = NULL;
-	// Operations
 	data->ops.zoom = 20;
 	data->ops.x_translate = 0;
 	data->ops.y_translate = 0;
 	data->ops.x_angle = 0.61;
 	data->ops.y_angle = 0;
 	data->ops.z_angle = 0;
-	// Color
 	data->color = 0xFFFFFF;
-	// Dimension
 	data->dimension = 1;
 }
 
@@ -76,8 +70,8 @@ int	main(int argc, char **argv)
 	data = malloc(sizeof(t_data));
 	init_data(data);
 	read_file(&data, argv[1]);
-	data->ops.x_translate = (data->img_w - (data->ops.zoom  * data->map_w)) / 2;
-	data->ops.y_translate = (data->img_h - (data->ops.zoom  * data->map_h)) / 2;
+	data->ops.x_translate = (data->img_w - (data->ops.zoom * data->map_w)) / 2;
+	data->ops.y_translate = (data->img_h - (data->ops.zoom * data->map_h)) / 2;
 	draw(data);
 	mlx_mouse_hook(data->mlx_win, mouse_hook, data);
 	mlx_hook(data->mlx_win, 2, (1L << 0), check_keys, data);
