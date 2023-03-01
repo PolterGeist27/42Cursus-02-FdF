@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 11:45:14 by diogmart          #+#    #+#             */
-/*   Updated: 2023/03/01 10:39:30 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/03/01 14:36:34 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,9 @@ void	read_file(t_data **data, char *file_name)
 	int		i;
 	int		h;
 
+	fd = open(file_name, 'r');
 	(*data)->map_h = get_height(file_name);
 	(*data)->map_w = get_width(file_name);
-	fd = open(file_name, 'r');
 	i = 0;
 	h = 0;
 	(*data)->map = (int **)malloc(sizeof(int *) * ((*data)->map_h));

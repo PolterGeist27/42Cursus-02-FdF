@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 11:45:06 by diogmart          #+#    #+#             */
-/*   Updated: 2023/03/01 10:39:09 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/03/01 14:42:16 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 
-	if (argc != 2)
+	if (argc != 2 || open(argv[1], 'r') == -1)
 	{
-		ft_printf("Error! Input 1 map to display\n");
+		ft_printf("Error\n");
 		return (0);
 	}
 	data = malloc(sizeof(t_data));

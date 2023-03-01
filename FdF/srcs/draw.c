@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 11:09:32 by diogmart          #+#    #+#             */
-/*   Updated: 2023/03/01 11:18:57 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/03/01 14:34:34 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	isometric(t_data *data, float *x, float *y, int *z)
 
 int	check_limits(t_data *data, int x, int y)
 {
-	if (data->img_w < x || x < 0)
+	if (data->img_w - 1 < x || x < 0)
 		return (0);
-	if (data->img_h < y || y < 0)
+	if (data->img_h - 1 < y || y < 0)
 		return (0);
 	return (1);
 }
