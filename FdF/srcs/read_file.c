@@ -6,32 +6,18 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 11:45:14 by diogmart          #+#    #+#             */
-/*   Updated: 2023/03/01 14:36:34 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/03/15 10:38:28 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-/* 
-void	ft_printmap(t_data *data)
+void	ft_error(t_data *data)
 {
-	int i = 0;
-	int h = 0;
-	while(h < data->height)
-	{
-		i = 0;
-		while (i < data->width)
-		{
-			if (data->map[h][i] == 10)
-				ft_printf("%d ", data->map[h][i]);
-			else if (data->map[h][i] == 0)
-				ft_printf("%d  ", data->map[h][i]);
-			i++;
-		}
-		ft_printf("\n");
-		h++;
-	}
-} */
+	ft_printf("Error\n");
+	free_data(data);
+	exit(1);
+}
 
 int	get_width(char *file_name)
 {
@@ -95,7 +81,9 @@ void	read_file(t_data **data, char *file_name)
 	int		i;
 	int		h;
 
-	fd = open(file_name, 'r');
+	fd = open(file_name, O_RDONLY, 0);
+	if (fd < 0)
+		ft_error(data);
 	(*data)->map_h = get_height(file_name);
 	(*data)->map_w = get_width(file_name);
 	i = 0;

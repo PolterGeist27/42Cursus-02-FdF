@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 11:45:06 by diogmart          #+#    #+#             */
-/*   Updated: 2023/03/01 14:42:16 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/03/15 10:46:15 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 
-	if (argc != 2 || open(argv[1], 'r') == -1)
+	if (argc != 2 || open(argv[1], O_RDONLY, 0) < 0)
 	{
 		ft_printf("Error\n");
 		return (0);
