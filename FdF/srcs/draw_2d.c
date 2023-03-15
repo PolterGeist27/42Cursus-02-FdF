@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 14:00:42 by diogmart          #+#    #+#             */
-/*   Updated: 2023/03/01 11:20:36 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/03/15 11:53:18 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	draw_2d(t_data *data)
 	t_vector	p1;
 
 	p0.y = 0;
+	p1.x = 0;
+	p1.y = 0;
 	while (p0.y < data->map_h)
 	{
 		p0.x = 0;

@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:44:03 by diogmart          #+#    #+#             */
-/*   Updated: 2023/03/01 12:30:16 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/03/15 11:48:40 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 # include "libft.h"
 # include "../minilibx/mlx.h"
 # include <math.h>
-# include <fcntl.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <fcntl.h>
+# include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <string.h>
@@ -81,12 +82,14 @@ typedef struct s_data {
 
 // main.c 
 int		ft_close(t_data *data);
+void	free_data(t_data *data);
 
 //	read_file.c
 void	read_file(t_data **data, char *file_name);
 int		get_height(char *file_name);
 int		get_width(char *file_name);
 void	fill_row(int *row, char *line);
+void	ft_error(t_data **data);
 
 //	utils.c
 int		ft_countwords(char const *s, char c);

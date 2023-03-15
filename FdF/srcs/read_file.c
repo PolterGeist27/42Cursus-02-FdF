@@ -6,16 +6,16 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 11:45:14 by diogmart          #+#    #+#             */
-/*   Updated: 2023/03/15 10:38:28 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/03/15 11:48:33 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_error(t_data *data)
+void	ft_error(t_data **data)
 {
 	ft_printf("Error\n");
-	free_data(data);
+	free_data(*data);
 	exit(1);
 }
 

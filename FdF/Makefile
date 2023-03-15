@@ -14,7 +14,7 @@ INCLIB = $(INC)/../lib
 
 CC = cc
 
-CFLAGS = -I$(LIBDIR) -I/usr/include -O3
+CFLAGS = -I $(LIBDIR) -I /usr/include -O3 -Wall -Wextra -Werror
 
 LFLAGS = $(NAMELIBFT) $(NAMEMLX) -L$(INCLIB) -lXext -lX11 -lm -lbsd
 
@@ -45,10 +45,6 @@ $(NAMELIBFT):
 $(NAMEMLX):
 	@make all -s -C ./minilibx
 	@echo "Compiled $@"
-
-# bonus:
-# 	make all -C ./libft
-# 	$(CC) -g $(CFLAGS) $(SRC_C_BONUS) $(NAMELIBFT) -o checker
 
 clean:
 	@rm -rf $(OBJS)

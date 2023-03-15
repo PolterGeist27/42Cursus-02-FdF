@@ -6,12 +6,11 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 11:09:32 by diogmart          #+#    #+#             */
-/*   Updated: 2023/03/01 14:34:34 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/03/15 11:52:32 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -77,6 +76,8 @@ void	draw(t_data *data)
 	t_vector	p1;
 
 	p0.y = 0;
+	p1.x = 0;
+	p1.y = 0;
 	while (p0.y < data->map_h)
 	{
 		p0.x = 0;
