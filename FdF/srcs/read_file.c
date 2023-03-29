@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 11:45:14 by diogmart          #+#    #+#             */
-/*   Updated: 2023/03/15 11:48:33 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/03/29 11:04:28 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	get_width(char *file_name)
 {
 	int		fd;
 	int		width;
+	int		word_count;
 	char	*line;
 
 	fd = open(file_name, 'r');
@@ -30,6 +31,9 @@ int	get_width(char *file_name)
 	width = ft_countwords(line, ' ');
 	while (line != NULL)
 	{
+		word_count = ft_countwords(line, ' ');
+		if (width < word_count)
+			width = word_count;
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -88,10 +92,10 @@ void	read_file(t_data **data, char *file_name)
 	(*data)->map_w = get_width(file_name);
 	i = 0;
 	h = 0;
-	(*data)->map = (int **)malloc(sizeof(int *) * ((*data)->map_h));
+	(*data)->map = (int **)ft_calloc(sizeof(int *), ((*data)->map_h));
 	line = get_next_line(fd);
 	while (h < (*data)->map_h)
-		(*data)->map[h++] = (int *)malloc(sizeof(int) * ((*data)->map_w));
+		(*data)->map[h++] = (int *)ft_calloc(sizeof(int), ((*data)->map_w));
 	while (line != NULL && i < (*data)->map_h)
 	{
 		fill_row((*data)->map[i++], line);
